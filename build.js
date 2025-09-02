@@ -53,3 +53,11 @@ let builder = await build({
 if (isDevelopment) {
 	await writeFile("metafile.json", JSON.stringify(builder.metafile));
 }
+
+const fs = require("fs");
+const path = require("path");
+
+fs.mkdirSync("dist", { recursive: true });
+fs.copyFileSync(path.join(__dirname, "index.html"), path.join(__dirname, "dist", "index.html"));
+fs.cpSync(path.join(__dirname, "uv"), path.join(__dirname, "dist", "uv"), {recursive: true});
+fs.cpSync(path.join(__dirname, "public"), path.join(__dirname, "dist", "public"), {recursive: true});
